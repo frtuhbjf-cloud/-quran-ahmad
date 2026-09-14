@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>القرآن الكريم | أحمد الحجاوي</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Tahoma", Arial, sans-serif;
+            background: #f4f1e8;
+            color: #29251f;
+            transition: 0.3s;
+        }
+
+        .header {
+            background: #173b2d;
+            color: white;
+            text-align: center;
+            padding: 35px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 34px;
+        }
+
+        .header p {
+            margin: 12px 0;
+            font-size: 18px;
+        }
+
+        .author {
+            color: #e0c37b;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 850px;
+            margin: 30px auto;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        button {
+            border: none;
+            background: #173b2d;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        .surah-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 22px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .surah-title {
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .surah-title h2 {
+            color: #173b2d;
+            font-size: 32px;
+            margin: 0 0 8px;
+        }
+
+        .surah-title p {
+            color: #777;
+            margin: 0;
+            font-size: 17px;
+        }
+
+        .basmala {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: #173b2d;
+            margin: 25px 0 35px;
+            line-height: 2;
+        }
+
+        .ayah {
+            font-size: 28px;
+            line-height: 2.3;
+            text-align: right;
+            margin: 18px 0;
+            padding: 10px 5px;
+        }
+
+        .number {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 36px;
+            height: 36px;
+            border: 2px solid #b28b45;
+            border-radius: 50%;
+            color: #8b682f;
+            font-size: 17px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        .separator {
+            height: 1px;
+            background: #e5e1d8;
+            margin: 5px 0;
+        }
+
+        .footer {
+            text-align: center;
+            color: #777;
+            padding: 30px 15px;
+            font-size: 15px;
+        }
+
+        .rights {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        /* الوضع الليلي */
+
+        body.dark {
+            background: #101412;
+            color: #eee;
+        }
+
+        body.dark .surah-card {
+            background: #1b211e;
+        }
+
+        body.dark .surah-title {
+            border-color: #3b423e;
+        }
+
+        body.dark .surah-title h2,
+        body.dark .basmala {
+            color: #d8b66a;
+        }
+
+        body.dark .surah-title p,
+        body.dark .footer {
+            color: #aaa;
+        }
+
+        body.dark .number {
+            color: #d8b66a;
+            border-color: #d8b66a;
+        }
+
+        body.dark .separator {
+            background: #343b37;
+        }
+
+        @media (max-width: 600px) {
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .header p {
+                font-size: 16px;
+            }
+
+            .surah-title h2 {
+                font-size: 28px;
+            }
+
+            .basmala {
+                font-size: 25px;
+            }
+
+            .ayah {
+                font-size: 23px;
+                line-height: 2.2;
+            }
+
+            .number {
+                width: 32px;
+                height: 32px;
+                font-size: 15px;
+            }
+
+            .surah-card {
+                padding: 25px 15px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 10px 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+
+        <h1>القرآن الكريم</h1>
+
+        <p>
+            ﴿ وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا ﴾
+        </p>
+
+        <div class="author">
+            أحمد الحجاوي
+        </div>
+
+    </header>
+
+
+    <main class="container">
+
+        <div class="controls">
+
+            <button onclick="increaseFont()">
+                تكبير الخط ＋
+            </button>
+
+            <button onclick="decreaseFont()">
+                تصغير الخط −
+            </button>
+
+            <button onclick="toggleDark()">
+                الوضع الليلي 🌙
+            </button>
+
+        </div>
+
+
+        <section class="surah-card">
+
+            <div class="surah-title">
+
+                <h2>
+                    سورة الفاتحة
+                </h2>
+
+                <p>
+                    مكية • 7 آيات
+                </p>
+
+            </div>
+
+
+            <div class="basmala">
+
+                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+
+            </div>
+
+
+            <div id="quran">
+
+                <div class="ayah">
+                    <span class="number">١</span>
+                    الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="ayah">
+                    <span class="number">٢</span>
+                    الرَّحْمَٰنِ الرَّحِيمِ
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="ayah">
+                    <span class="number">٣</span>
+                    مَالِكِ يَوْمِ الدِّينِ
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="ayah">
+                    <span class="number">٤</span>
+                    إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="ayah">
+                    <span class="number">٥</span>
+                    اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="ayah">
+                    <span class="number">٦</span>
+                    صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="ayah">
+                    <span class="number">٧</span>
+                    غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ
+                    وَلَا الضَّالِّينَ
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="footer">
+
+        <p>
+            اللهم اجعل القرآن ربيع قلوبنا ونور صدورنا 🤲
+        </p>
+
+        <p class="rights">
+            © 2026 جميع الحقوق محفوظة — أحمد الحجاوي
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        let fontSize = 28;
+
+        function increaseFont() {
+
+            if (fontSize < 40) {
+
+                fontSize += 2;
+
+                updateFont();
+
+            }
+
+        }
+
+
+        function decreaseFont() {
+
+            if (fontSize > 18) {
+
+                fontSize -= 2;
+
+                updateFont();
+
+            }
+
+        }
+
+
+        function updateFont() {
+
+            document
+                .querySelectorAll(".ayah")
+                .forEach(function(ayah) {
+
+                    ayah.style.fontSize = fontSize + "px";
+
+                });
+
+        }
+
+
+        function toggleDark() {
+
+            document
+                .body
+                .classList
+                .toggle("dark");
+
+        }
+
+    </script>
+
+</body>
+
+</html>
